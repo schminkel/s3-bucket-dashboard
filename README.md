@@ -1,29 +1,41 @@
-# S3 bucket dashboard
+# S3 Bucket Dashboard
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
-
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/thorstens-projects-a471c665/v0-s3-bucket-dashboard)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/cWyXLXLx3TM)
+[![Deployed on GitHub Pages](https://img.shields.io/badge/Deployed%20on-GitHub%20Pages-222?style=for-the-badge&logo=github)](https://tschminkel.github.io/s3-bucket-dashboard/)
+[![Auto-Updated Daily](https://img.shields.io/badge/Auto--Updated-Daily-success?style=for-the-badge&logo=github-actions)](https://github.com/tschminkel/s3-bucket-dashboard/actions)
 
 ## Overview
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+This Next.js application displays an S3 bucket storage dashboard with automated daily data updates. The app reads data from a CSV file at build time, making it perfect for static site hosting on GitHub Pages.
 
-This Next.js application displays an S3 bucket storage dashboard that reads data from a CSV file at build time, making it perfect for static site hosting on GitHub Pages.
+**Key Features:**
+- 📊 **Real-time Monitoring**: Track S3 bucket sizes and growth trends
+- 🔄 **Automated Updates**: GitHub Actions fetches fresh data daily from AWS S3
+- 🚀 **Static Site**: Fully static Next.js export deployed on GitHub Pages
+- 📈 **Visual Analytics**: Interactive charts showing storage trends over time
 
-## Can this app be hosted on GitHub Pages?
+> **Note:** The initial version of this dashboard was created with [v0.dev](https://v0.dev), an AI-powered UI generation tool.
 
-**YES!** This Next.js app is fully compatible with GitHub Pages because:
+## Automated Data Updates
 
-- ✅ **Static Data Generation**: All S3 bucket data is read from `public/s3-data.csv` at build time
-- ✅ **No Server Required**: The app uses Next.js static export (`output: 'export'`) to generate pure HTML/CSS/JS
-- ✅ **Build-Time Processing**: All data parsing and calculations happen during the build process
-- ✅ **No API Routes**: No server-side endpoints that require a Node.js runtime
+This project includes a **GitHub Actions workflow** that automatically monitors your S3 buckets and updates the dashboard daily:
 
-The application processes the CSV data during `next build` and generates static HTML pages that can be served from any static hosting service, including GitHub Pages.
+- **Schedule**: Runs daily at midnight UTC (can also be triggered manually)
+- **Process**: Fetches current S3 bucket sizes from AWS using the AWS SDK
+- **Updates**: Automatically commits updated data to `public/s3-data.csv`
+- **Deployment**: GitHub Pages automatically rebuilds and deploys the updated dashboard
+
+The workflow is defined in [`.github/workflows/s3-bucket-monitor.yml`](.github/workflows/s3-bucket-monitor.yml) and requires the following secrets to be configured:
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+- `AWS_REGION`
 
 ## Deployment
+
+### Deployed on GitHub Pages
+
+This application is deployed on **GitHub Pages** and automatically updates when changes are pushed to the `main` branch.
+
+**Live Site**: `https://<username>.github.io/s3-bucket-dashboard/`
 
 ### Deploy to GitHub Pages
 
@@ -53,24 +65,22 @@ This repository includes a GitHub Actions workflow that automatically deploys to
 
 Your site will be available at: `https://<username>.github.io/<repository-name>/`
 
-### Deploy to Vercel
+### Additional Deployment: Vercel
 
-Your project is also live at:
+This application is additionally deployed on **Vercel** for alternative hosting:
 
-**[https://vercel.com/thorstens-projects-a471c665/v0-s3-bucket-dashboard](https://vercel.com/thorstens-projects-a471c665/v0-s3-bucket-dashboard)**
+**Vercel Site**: [https://vercel.com/thorstens-projects-a471c665/v0-s3-bucket-dashboard](https://vercel.com/thorstens-projects-a471c665/v0-s3-bucket-dashboard)
 
-## Build your app
+Both deployments use the same codebase and benefit from the automated daily S3 data updates.
 
-Continue building your app on:
+## Why GitHub Pages?
 
-**[https://v0.app/chat/cWyXLXLx3TM](https://v0.app/chat/cWyXLXLx3TM)**
+This Next.js app is fully compatible with GitHub Pages because:
 
-## How It Works
-
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+- ✅ **Static Data Generation**: All S3 bucket data is read from `public/s3-data.csv` at build time
+- ✅ **No Server Required**: The app uses Next.js static export (`output: 'export'`) to generate pure HTML/CSS/JS
+- ✅ **Build-Time Processing**: All data parsing and calculations happen during the build process
+- ✅ **No API Routes**: No server-side endpoints that require a Node.js runtime
 
 ## Local Development
 
@@ -89,7 +99,17 @@ pnpm build
 
 ## Data Source
 
-The dashboard reads S3 bucket data from `public/s3-data.csv`. Update this file with your S3 bucket metrics to see the data reflected in the dashboard after the next build.
+The dashboard reads S3 bucket data from `public/s3-data.csv`. This file is **automatically updated daily** by the GitHub Actions workflow, which:
+
+1. Connects to AWS using configured credentials
+2. Fetches current size data for all monitored S3 buckets
+3. Appends new entries to the CSV file
+4. Commits and pushes the changes to the repository
+5. Triggers GitHub Pages to rebuild and redeploy the dashboard
+
+### Manual Updates
+
+You can also manually update the CSV file or trigger the workflow from the Actions tab in GitHub.
 
 ### CSV Format:
 ```csv
