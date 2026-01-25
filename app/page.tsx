@@ -15,8 +15,10 @@ export default async function DashboardPage() {
   const rawData = parseCSV(fileContents)
   const buckets = processS3Data(rawData)
   
-  // Calculate total storage
-  const totalStorage = buckets.reduce((sum, bucket) => sum + bucket.currentSize, 0)
+  // Calculate total storage (excluding "all" bucket to avoid double counting)
+  const totalStorage = buckets
+    .filter(bucket => bucket.bucketName !== 'all')
+    .reduce((sum, bucket) => sum + bucket.currentSize, 0)
   const totalFormatted = bytesToSize(totalStorage)
   
   return (
