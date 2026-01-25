@@ -1,14 +1,18 @@
-{
+  {
   "name": "my-v0-project",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
-    "start": "next start"
+    "start": "next start",
+    "update-s3": "node scripts/update-s3-data.js"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.709.0",
+    "dotenv": "^16.4.7",
     "@hookform/resolvers": "^3.10.0",
     "@radix-ui/react-accordion": "1.2.2",
     "@radix-ui/react-alert-dialog": "1.1.4",
