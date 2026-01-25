@@ -3,6 +3,7 @@ import path from 'path'
 import { BucketCard } from '@/components/bucket-card'
 import { parseCSV, processS3Data, bytesToSize } from '@/lib/s3-data'
 import { PasswordDialog } from '@/components/password-dialog'
+import { LogoutLink } from '@/components/logout-link'
 import { Database, HardDrive } from 'lucide-react'
 
 export default async function DashboardPage() {
@@ -85,7 +86,7 @@ export default async function DashboardPage() {
               >
                 s3-data.csv
               </a>
-              {' '}• Showing last 30 days
+              {' '}• Showing last 30 days • <LogoutLink />
             </p>
           </div>
       </footer>
