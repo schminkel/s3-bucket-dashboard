@@ -79,7 +79,7 @@ export default async function DashboardPage() {
             <p className="text-xs text-muted-foreground text-center">
               Data updated from{' '}
               <a 
-                href="/s3-data.csv" 
+                href="s3-data.csv" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-foreground underline underline-offset-2 hover:text-primary transition-colors"
