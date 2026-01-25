@@ -60,6 +60,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build with Next.js
+        env:
+          NEXT_PUBLIC_APP_PASSWORD: ${{ secrets.NEXT_PUBLIC_APP_PASSWORD }}
         run: pnpm run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
