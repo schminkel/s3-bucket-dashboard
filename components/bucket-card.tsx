@@ -34,9 +34,14 @@ export function BucketCard({ bucket }: BucketCardProps) {
               <Database className="h-4 w-4 text-muted-foreground" />
             </div>
             <div>
-              <h3 className="font-medium text-sm text-foreground leading-none">
+              <a 
+                href={`https://s3.console.aws.amazon.com/s3/buckets/${bucket.bucketName}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-sm text-foreground leading-none hover:text-blue-500 hover:underline transition-colors"
+              >
                 {bucket.bucketName}
-              </h3>
+              </a>
               <p className="text-xs text-muted-foreground mt-1.5">S3 Bucket</p>
             </div>
           </div>
