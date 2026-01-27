@@ -2,6 +2,7 @@
 
 [![Deployed on GitHub Pages](https://img.shields.io/badge/Deployed%20on-GitHub%20Pages-222?style=for-the-badge&logo=github)](https://tschminkel.github.io/s3-bucket-dashboard/)
 [![Auto-Updated Daily](https://img.shields.io/badge/Auto--Updated-Daily-success?style=for-the-badge&logo=github-actions)](https://github.com/tschminkel/s3-bucket-dashboard/actions)
+[![S3 Bucket Size Monitor](https://github.com/schminkel/s3-bucket-dashboard/actions/workflows/s3-bucket-monitor.yml/badge.svg)](https://github.com/schminkel/s3-bucket-dashboard/actions/workflows/s3-bucket-monitor.yml)
 
 ## Overview
 
