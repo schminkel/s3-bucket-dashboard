@@ -44,7 +44,7 @@ export function bytesToSize(bytes: number): { value: number; unit: string } {
 }
 
 export function processS3Data(data: S3DataPoint[]): BucketData[] {
-  const now = new Date('2026-01-25')
+  const now = new Date()
   const thirtyDaysAgo = new Date(now)
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
   
