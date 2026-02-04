@@ -20,27 +20,32 @@ This Next.js application displays an S3 bucket storage dashboard with automated 
 
 This project includes a **GitHub Actions workflow** that automatically monitors your S3 buckets and updates the dashboard daily:
 
-- **Schedule**: Runs daily at midnight UTC (can also be triggered manually)
+- **Data Collection Schedule**: Runs daily at midnight UTC (00:00)
 - **Process**: Fetches current S3 bucket sizes from AWS using the AWS SDK
 - **Updates**: Automatically commits updated data to `public/s3-data.csv`
-- **Deployment**: GitHub Pages automatically rebuilds and deploys the updated dashboard
+- **Deployment Schedule**: Runs daily at 1 AM UTC (01:00), one hour after data collection
+- **Result**: GitHub Pages is automatically rebuilt and deployed with the latest data
 
-The workflow is defined in [`.github/workflows/s3-bucket-monitor.yml`](.github/workflows/s3-bucket-monitor.yml) and requires the following secrets to be configured:
+The data collection workflow is defined in [`.github/workflows/s3-bucket-monitor.yml`](.github/workflows/s3-bucket-monitor.yml) and requires the following secrets to be configured:
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
 - `AWS_REGION`
+
+The deployment workflow is defined in [`.github/workflows/nextjs.yml`](.github/workflows/nextjs.yml) and runs automatically on a schedule, on pushes to main, or can be triggered manually.
 
 ## Deployment
 
 ### Deployed on GitHub Pages
 
-This application is deployed on **GitHub Pages** and automatically updates when changes are pushed to the `main` branch.
+This application is deployed on **GitHub Pages** and automatically updates:
+- When changes are pushed to the `main` branch
+- Daily at 1 AM UTC to deploy updated S3 bucket data
 
 **Live Site**: `https://<username>.github.io/s3-bucket-dashboard/`
 
 ### Deploy to GitHub Pages
 
-This repository includes a GitHub Actions workflow that automatically deploys to GitHub Pages on every push to the `main` branch.
+This repository includes a GitHub Actions workflow that automatically deploys to GitHub Pages on every push to the `main` branch and on a daily schedule at 1 AM UTC.
 
 #### Setup Steps:
 
