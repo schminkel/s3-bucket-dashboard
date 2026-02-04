@@ -19,11 +19,10 @@ export function BucketCard({ bucket }: BucketCardProps) {
     value: d.size / (1024 * 1024 * 1024) // Convert to GB for chart
   }))
   
-  // Calculate domain with padding for better visibility
+  // Calculate max value for consistent linear scaling from zero
   const values = chartData.map(d => d.value)
-  const minValue = Math.min(...values)
   const maxValue = Math.max(...values)
-  const padding = (maxValue - minValue) * 0.1 || maxValue * 0.1 || 0.1
+  const yAxisMax = maxValue * 1.1 // Add 10% padding at the top
   
   return (
     <Card className="bg-card border-border hover:border-muted-foreground/20 transition-colors">
@@ -93,7 +92,7 @@ export function BucketCard({ bucket }: BucketCardProps) {
               />
               <YAxis 
                 hide
-                domain={[minValue - padding, maxValue + padding]}
+                domain={[0, yAxisMax]}
               />
               <Tooltip
                 content={({ active, payload }) => {
